@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+</head>
+<body>
+    <p>입력한 수들의 갯수와 합</p>
+    <script>
+        var n = 1;
+        var sum = 0;
+        var m = 1;
+        while(n != 0){
+            n = prompt(m + "번째 수를 입력하세요.(0 입력시 종료)");
+            if(n != 0){
+            sum += Number(n);
+            console.log("갯수 : " + m + " 합 : " + sum);
+            m++;
+            }
+        }
+        document.write(m-1 + "개의 숫자의 합 : " + sum);
+    </script>
+</body>
+</html>
