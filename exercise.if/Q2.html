@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+</head>
+<body>
+<p>문장의 대소문자 구분</p>
+<script>
+    var sen = prompt("문장을 입력하세요.");
+    if(sen === sen.toUpperCase()){
+        console.log("대문자 문장입니다.");
+    }else if(sen === sen.toLowerCase()){
+        console.log("소문자 문장입니다.");
+    }else{
+        console.log("보통 문장입니다.");
+    }
+</script>    
+</body>
+</html>
