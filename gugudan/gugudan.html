@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Gugudan</title>
+</head>
+<body>
+    <h1>구구단 구현</h1>
+    출력할 단 수 : <input type = "text" id = "num">
+    <button onclick = "runGugudan()">확인</button>
+
+    <script>
+        function runGugudan() {
+            var num = document.getElementById("num").value;
+            num = Number(num);
+
+            if(num < 2 || num > 9) {
+                document.write("2 이상 9이하의 수를 입력하세요.");
+            } else {
+                document.write("<h2>" + num + "단" + "<br></h2>");
+                for(var i = 1; i <= 9; i++){
+                document.write(num + " * " + i + " = " + (num * i) + "<br>");
+                }
+            }
+        }
+    </script>    
+</body>
+</html>
