@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>fine prime number</title>
+</head>
+<body>
+    <h1>Fine Prime Number</h1>
+    <script>
+        var numbers = {};
+        numbers.all = [];   //모든 숫자를 담을 배열
+        numbers.prime = []; //소수를 담을 배열
+        numbers.addAll = function(max_num) {    //max_num 까지의 범위 설정
+            for (var i = 2; i < max_num + 1; i++) {
+                this.all.push(i);
+            }
+        };
+        numbers.isPrime = function(number) {    //소수 판별
+            for (var i = 2; i < number; i++) {
+                if (number % i === 0) return false;
+            }
+            return true;
+        };
+        numbers.addPrime = function(number) {   //판별된 소수를 배열에 담음
+            if(this.isPrime(number) === true) {
+                this.prime.push(number);
+            }
+        }
+        numbers.getAllPrimes = function() {     //판별된 소수들을 화면에 출력
+            for (var i = 0; i < this.prime.length; i++) {
+                document.write(this.prime[i] + ", ");
+            }
+            document.write("End");
+        }
+        var num = prompt("몇까지의 숫자를 판별할까요?");
+        num = Number(num);
+
+        numbers.addAll(num);
+        for(var i = 0; i < numbers.all.length; i++) {
+            numbers.addPrime(numbers.all[i]);
+        }
+        document.write("총 " + numbers.prime.length + "개의 소수 </ba>");
+        numbers.getAllPrimes();
+    </script>
+</body>
+</html>
