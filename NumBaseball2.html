@@ -6,54 +6,63 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>NumBaseball</title>
     <button type="button" onclick=Game.play()>다시입력하기</button><br>
+    <h1 id="times"></h1>
     <p id="display"></p>
 </head>
 <body>
     <script>
         var Game = {};
-        Game.ComNum = [];
-        Game.UserNum = [];
-        Game.ball = 0;
-        Game.strike = 0;
-        Game.getCom = function() {
+        Game.ComNum = [];   //컴퓨터의 숫자를 담을 배열
+        Game.UserNum = [];  //유저의 숫자를 담을 배열
+        Game.ball = 0;      //ball 점수
+        Game.strike = 0;    //strike 점수
+        Game.times = 1;     //도전 횟수
+        Game.getCom = function() {  //1~9까지의 랜덤한 숫자를 지정해 배열에 담는 함수
             for(var i = 0; i < 3; i++){
                 var num = 0;
-                while(num === 0){
+                while(num === 0){   //1~9까지의 수를 지정해야해서 0이 나오면 다시 값을 정하도록 함
                     var num = Math.floor(Math.random() * 10);
-                    if(num === this.ComNum[i - 1] || num === this.ComNum[i - 2]){
+                    if(num === this.ComNum[i - 1] || num === this.ComNum[i - 2]){   //그 전 숫자들과 중복되지 않은 숫자를 지정하도록 함
                         num = 0;
                     }
                 }
                 this.ComNum[i] = num;
             }
         };
-        Game.getUser = function() {
+        Game.getUser = function() { //유저의 숫자를 입력받음
+            var num = 0;
             for(var i = 0; i < 3; i++) {
-                this.UserNum[i] = Number(prompt((i + 1) + "번째 숫자를 입력하세요."));
+                num = Number(prompt((i + 1) + "번째 숫자를 입력하세요."));
+                if(num === this.UserNum[i - 1] || num === this.UserNum[i - 2]){ //중복x
+                    num = Number(prompt("중복이 아닌 숫자를 입력하세요."));
+                }
+                this.UserNum[i] = num;
             }
         };
-        Game.calScore = function() {
+        Game.calScore = function() {    //점수계산
             this.ball = 0;
-            this.strike = 0;
-            for(var i = 0; i < 3; i++){
+            this.strike = 0;    //점수 초기화
+            for(var i = 0; i < 3; i++){ //숫자 비교 반복문
                 for(var p = 0; p < 3; p++){
-                    if(this.ComNum[i] === this.UserNum[p]){
+                    if(this.ComNum[i] === this.UserNum[p]){ //단순히 숫자의 위치가 같은지 확인
                         this.ball++;
                     }
                 }
-                if(this.ComNum[i] === this.UserNum[i]){
+                if(this.ComNum[i] === this.UserNum[i]){     //숫자의 자리까지 같은지 확인
                     this.strike++;
                     this.ball--;
                 }
             }
+            document.getElementById("times").innerHTML = this.times + '번째 도전<br>';
             document.getElementById("display").innerHTML = this.strike + '스트라이크 ' + this.ball + '볼 입니다.';
         };
         Game.play = function() {
             this.getUser();
             this.calScore();
-            if(this.strike === 3) {
-                document.write("<h1><strong>승리!!</strong></h1>");
+            if(this.strike === 3) { //3스트라이크 시 승리 출력
+                document.write("<h1><strong>승리!!</strong></h1><br>" + this.times + "번 도전하셨습니다.");
             }
+            this.times++;
         };
         Game.getCom();
         Game.play();        
