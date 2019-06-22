@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>gugudanv2</title>
+</head>
+<body>
+    <script>
+        var results = [];
+        for (var p = 2; p <= 9; p++) {
+            results.push("<h2>" + p + "단</h2>");
+            for (var q = 1; q <= 9; q++) {
+                results.push(p + " * " + q + " = " + (p * q));
+            }
+        }
+        for (var i = 0; i < results.length; i++) {
+            document.write(results[i] + "<br>");
+        }
+    </script>
+</body>
+</html>
