@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>NumBaseball</title>
+    <button type="button" onclick=Game.play()>다시입력하기</button><br>
+    <p id="display"></p>
+</head>
+<body>
+    <script>
+        var Game = {};
+        Game.ComNum = [];
+        Game.UserNum = [];
+        Game.ball = 0;
+        Game.strike = 0;
+        Game.getCom = function() {
+            for(var i = 0; i < 3; i++){
+                var num = 0;
+                while(num === 0){
+                    var num = Math.floor(Math.random() * 10);
+                    if(num === this.ComNum[i - 1] || num === this.ComNum[i - 2]){
+                        num = 0;
+                    }
+                }
+                this.ComNum[i] = num;
+            }
+        };
+        Game.getUser = function() {
+            for(var i = 0; i < 3; i++) {
+                this.UserNum[i] = Number(prompt((i + 1) + "번째 숫자를 입력하세요."));
+            }
+        };
+        Game.calScore = function() {
+            this.ball = 0;
+            this.strike = 0;
+            for(var i = 0; i < 3; i++){
+                for(var p = 0; p < 3; p++){
+                    if(this.ComNum[i] === this.UserNum[p]){
+                        this.ball++;
+                    }
+                }
+                if(this.ComNum[i] === this.UserNum[i]){
+                    this.strike++;
+                    this.ball--;
+                }
+            }
+            document.getElementById("display").innerHTML = this.strike + '스트라이크 ' + this.ball + '볼 입니다.';
+        };
+        Game.play = function() {
+            this.getUser();
+            this.calScore();
+            if(this.strike === 3) {
+                document.write("<h1><strong>승리!!</strong></h1>");
+            }
+        };
+        Game.getCom();
+        Game.play();        
+    </script>
+</body>
+</html>
