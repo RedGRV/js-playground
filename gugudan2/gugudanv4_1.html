@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Gugudanv4</title>
+</head>
+<body>
+    <script>
+        gugudan = {};
+        gugudan.results = [];
+        gugudan.cal = function(num) {
+            for (var i = 1; i <= 9; i++) {
+                this.results.push(num * i);
+            }
+        };
+        gugudan.print = function() {
+            var i = this.results[0]
+            for(var p = 0;p < 9; p++) {
+                var num = this.results.shift();
+                document.write(i + " X " + (p + 1) + " = " + num + "<br>");
+            }
+        }
+        
+        function main() {
+            for(var i = 2; i <= 9; i++) {
+                document.write("<h2>" + i + "단</h2>");
+                gugudan.cal(i);
+                gugudan.print();
+            }
+        }
+
+        main();
+    </script>
+</body>
+</html>
