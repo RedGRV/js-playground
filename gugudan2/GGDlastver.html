@@ -13,12 +13,18 @@
         gugudan.num = [];
         gugudan.results = [];
         gugudan.getnum = function() {
-            var user = prompt("몇단을 입력할까요?");
+            var user = prompt("몇단까지 입력할까요?");
             this.num = user.split(",");
         };
         gugudan.cal = function(num) {
-            for(var i = 0; i < this.num[1]; i++) {
-                this.results[i] = num * (i + 1);
+            if(this.num.length === 2) {
+                for(var i = 0; i < this.num[1]; i++) {
+                    this.results[i] = num * (i + 1);
+                }
+            } else {
+                for(var i = 0; i < 9; i++) {
+                    this.results[i] = num * (i + 1);
+                }
             }
         };
         gugudan.print = function() {
