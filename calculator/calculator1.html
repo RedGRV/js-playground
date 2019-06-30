@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Calculator</title>
+    <h1>계산기</h1>
+</head>
+<body>
+    <script>
+        cal = {};
+        cal.num = [10, 5];
+        cal.perform = function() {
+            var x = this.num[0];
+            var y = this.num[1];
+            document.write(x + " + " + y + " = " + (x + y) + "<br>");
+            document.write(x + " - " + y + " = " + (x - y) + "<br>");
+            document.write(x + " * " + y + " = " + (x * y) + "<br>");
+            document.write(x + " / " + y + " = " + (x / y) + "<br>");
+        }
+        var main = function() {
+            cal.perform();
+        }
+        main();
+    </script>
+</body>
+</html>
