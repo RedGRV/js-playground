@@ -15,13 +15,13 @@
 <body>   
     <script>
         var run = function() {
-            var n1 = document.getElementById("firstnum");
-            var sign = document.getElementById("sign");
-            var n2 = document.getElementById("secondnum");
+            var n1 = document.getElementById("firstnum").value;
+            var sign = document.getElementById("sign").value;
+            var n2 = document.getElementById("secondnum").value;
             var result = document.getElementById("result");
-            n1 = Number(n1.value);
-            n2 = Number(n2.value);
-            switch(sign.value) {
+            n1 = Number(n1);
+            n2 = Number(n2);
+            switch(sign) {
                 case "+":
                     result.innerHTML = (n1 + n2);
                     break;
