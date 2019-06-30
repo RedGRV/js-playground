@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Calculator</title>
+    <h1>계산기</h1>
+</head>
+<body>
+    <script>
+        cal = {};
+        cal.num = [];
+        cal.sum = -1;
+        cal.calc = function() {
+            cal.num[0] = Number(prompt("숫자를 입력하세요."));
+            while(true) {
+                cal.num[1] = prompt("연산자를 입력하세요.");
+                if(cal.num[1] === "q") {
+                    break;
+                }
+                cal.num[2] = Number(prompt("다음 숫자를 입력하세요. 현재 식: " + cal.num[0] + cal.num[1]));
+                if(cal.num[1] === "+") {
+                    cal.num[0] = cal.num[0] + cal.num[2];
+                }
+                else if(cal.num[1] === "-") {
+                    cal.num[0] = cal.num[0] - cal.num[2];
+                }
+                else if(cal.num[1] === "*") {
+                    cal.num[0] = cal.num[0] * cal.num[2];
+                }
+                else if(cal.num[1] === "/") {
+                    cal.num[0] = cal.num[0] / cal.num[2];
+                }
+            }
+            document.write("결과: " + this.num[0]);
+        }
+        cal.calc();
+    </script>
+</body>
+</html>
