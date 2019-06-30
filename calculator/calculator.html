@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Calculator</title>
     <h1>계산기</h1>
-    <input type="text" id="input"><button id="btn" onclick="cal.count()">확인</button><br>
+    <input type="text" id="input"><button id="btn" onclick="cal.getnum()">확인</button><br>
     <div id="result"></div>
 </head>
 <body>
@@ -15,41 +15,41 @@
         cal.num = 0;
         cal.ret = 0;
         cal.form = [];
-        cal.count = function() {
+        cal.getnum = function() {
             var input = document.getElementById('input');
             this.form[this.num] = input.value;
             var result = document.getElementById('result');
             result.innerHTML = this.form[this.num];
             this.num++;
+            cal.count();
+        }
+        cal.reset = function() {
+            this.form = [];
+            this.form[0] = this.ret;
+            this.num = 1;
+        }
+        cal.count = function() {
             var x = Number(this.form[0]);
             var y = Number(this.form[2]);
             if (this.form[this.form.length-2] === "+") {
-                result.innerHTML = x + " + " + y + " = " + (x + y);
                 this.ret = (x + y);
-                this.form = [];
-                this.form[0] = this.ret;
-                this.num = 1;
+                result.innerHTML = x + " + " + y + " = " + this.ret;
+                cal.reset();
             }
             else if (this.form[this.form.length-2] === "-") {
-                result.innerHTML = x + " - " + y + " = " + (x - y);
                 this.ret = (x - y);
-                this.form = [];
-                this.form[0] = this.ret;
-                this.num = 1;
+                result.innerHTML = x + " - " + y + " = " + this.ret;
+                cal.reset();
             }
             else if (this.form[this.form.length-2] === "*") {
-                result.innerHTML = x + " * " + y + " = " + (x * y);
                 this.ret = (x * y);
-                this.form = [];
-                this.form[0] = this.ret;
-                this.num = 1;
+                result.innerHTML = x + " * " + y + " = " + this.ret;
+                cal.reset();
             }
             else if (this.form[this.form.length-2] === "/") {
-                result.innerHTML = x + " / " + y + " = " + (x / y);
                 this.ret = (x / y);
-                this.form = [];
-                this.form[0] = this.ret;
-                this.num = 1;
+                result.innerHTML = x + " / " + y + " = " + this.ret;
+                cal.reset();
             }            
         }
     </script>
