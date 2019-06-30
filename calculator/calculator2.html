@@ -7,6 +7,7 @@
     <title>Calculator</title>
     <h1>계산기</h1>
     <input type="text" id="input"><button id="btn" onclick="cal.getnum()">입력</button><br>
+    <div id="display"></div>
     <button id="perform" onclick="cal.perform()">실행!</button>
 </head>
 <body>
@@ -15,6 +16,8 @@
         cal.num = [];
         cal.getnum = function() {
             var num = document.getElementById("input");
+            var disp = document.getElementById("display");
+            disp.innerHTML = "입력한 수: " + num.value;
             this.num.push(num.value);
         }
         cal.perform = function() {
