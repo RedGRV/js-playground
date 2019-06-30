@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Calculator</title>
+    <h1>계산기</h1>
+    <h2>▼식을 입력하세요▼</h2>
+    <input type="text" id="firstnum" style="width:15px">
+    <input type="text" id="sign" style="width:15px">
+    <input type="text" id="secondnum" style="width:15px"> = <span id="result"></span><br>
+    <button onclick="run();">run!</button>
+</head>
+<body>   
+    <script>
+        var run = function() {
+            var n1 = document.getElementById("firstnum");
+            var sign = document.getElementById("sign");
+            var n2 = document.getElementById("secondnum");
+            var result = document.getElementById("result");
+            n1 = Number(n1.value);
+            n2 = Number(n2.value);
+            switch(sign.value) {
+                case "+":
+                    result.innerHTML = (n1 + n2);
+                    break;
+                case "-":
+                    result.innerHTML = (n1 - n2);
+                    break;
+                case "*":
+                    result.innerHTML = (n1 * n2);
+                    break;
+                case "/":
+                    result.innerHTML = (n1 / n2);
+                    break;
+            }
+        }
+    </script>    
+</body>
+</html>
