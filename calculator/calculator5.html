@@ -12,15 +12,15 @@
         function getFirstValue() {
             var num = Number(prompt("첫번째 숫자를 입력하세요."));
             return num;
-        };
+        }
         function getSecondValue(form) {
             var num = Number(prompt("다음 숫자를 입력하세요. 현재 식: " + form.join(' ')));
             return num;
-        };     
+        }
         function getOperator() {
             var op = prompt("연산자를 입력하세요.");
             return op;
-        };
+        }
         function calculate(op, num1, num2) {
             if(op === "+") {
                 num1 += num2;
@@ -35,11 +35,11 @@
                 num1 /= num2;
             }
             return num1;
-        };
+        }
         function print(form, result) {
             var a = form.join(' ');
             document.write(a + " = " + result);
-        };
+        }
         
         function main() {
             var form = [];
@@ -57,7 +57,7 @@
                 n1 = calculate(op, n1, n2);
             }
             print(form, n1);
-        };
+        }
         main();                                                                                                                                                                                                                                                                                                  
     </script>
 </body>
