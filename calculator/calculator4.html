@@ -12,24 +12,24 @@
         cal = {};
         cal.num = [];
         cal.calc = function() {
-            cal.num[0] = Number(prompt("숫자를 입력하세요."));
+            this.num[0] = Number(prompt("숫자를 입력하세요."));
             while(true) {
-                cal.num[1] = prompt("연산자를 입력하세요.");
-                if(cal.num[1] === "q") {
+                this.num[1] = prompt("연산자를 입력하세요.");
+                if(this.num[1] === "q") {
                     break;
                 }
-                cal.num[2] = Number(prompt("다음 숫자를 입력하세요. 현재 식: " + cal.num[0] + cal.num[1]));
-                if(cal.num[1] === "+") {
-                    cal.num[0] = cal.num[0] + cal.num[2];
+                this.num[2] = Number(prompt("다음 숫자를 입력하세요. 현재 식: " + this.num[0] + this.num[1]));
+                if(this.num[1] === "+") {
+                    this.num[0] += this.num[2];
                 }
-                else if(cal.num[1] === "-") {
-                    cal.num[0] = cal.num[0] - cal.num[2];
+                else if(this.num[1] === "-") {
+                    this.num[0] -= this.num[2];
                 }
-                else if(cal.num[1] === "*") {
-                    cal.num[0] = cal.num[0] * cal.num[2];
+                else if(this.num[1] === "*") {
+                    this.num[0] *= this.num[2];
                 }
-                else if(cal.num[1] === "/") {
-                    cal.num[0] = cal.num[0] / cal.num[2];
+                else if(this.num[1] === "/") {
+                    this.num[0] /= this.num[2];
                 }
             }
             document.write("결과: " + this.num[0]);
