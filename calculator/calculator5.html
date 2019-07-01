@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Calculator</title>
+    <h1>계산기</h1>
+</head>
+<body>
+    <script>
+        var num1 = -1;
+        var num2 = -1;
+        var op = "";
+        function getFirstValue() {
+            num1 = Number(prompt("첫번째 숫자를 입력하세요."));
+        };
+        function getSecondValue() {
+            num2 = Number(prompt("다음 숫자를 입력하세요. 현재 식: " + num1 + op));
+        };     
+        function getOperator() {
+            op = prompt("연산자를 입력하세요.");
+        };
+        function calculate() {
+            if(op === "+") {
+                num1 += num2;
+            }
+            else if(op === "-") {
+                num1 -= num2;
+            }
+            else if(op === "*") {
+                num1 *= num2;
+            }
+            else if(op === "/") {
+                num1 /= num2;
+            }
+        };
+        function print() {
+            document.write("결과: " + num1);
+        };
+        
+        function main() {
+            getFirstValue();
+            while(true) {
+                getOperator();
+                if(op === "q") {
+                    break;
+                }
+                getSecondValue();
+                calculate();
+            }
+            print();
+        };
+        main();                                                                                                                                                                                                                                                                                                  
+    </script>
+</body>
+</html>
