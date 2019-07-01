@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Calculator</title>
+    <h1>계산기</h1>
+</head>
+<body>
+    <script>
+        var input = {};
+        input.getFirstValue = function() {
+            var num = Number(prompt("첫번째 숫자를 입력하세요."));
+            return num;
+        };
+        input.getSecondValue = function(form) {
+            var num = Number(prompt("다음 숫자를 입력하세요. 현재 식: " + form.join(' ')));
+            return num;
+        };
+        input.getOperator = function() {
+            var op = prompt("연산자를 입력하세요.");
+            return op;
+        };
+
+        var output = {};
+        output.print = function(form, result) {
+            var a = form.join(' ');
+            document.write(a + " = " + result);
+        };
+
+        var calculator = {};
+        calculator.calculate = function(op, num1, num2) {
+            if(op === "+") {
+                num1 += num2;
+            }
+            else if(op === "-") {
+                num1 -= num2;
+            }
+            else if(op === "*") {
+                num1 *= num2;
+            }
+            else if(op === "/") {
+                num1 /= num2;
+            }
+            return num1;
+        };
+
+        function main() {
+            var form = [];
+            var n1 = input.getFirstValue();
+            form.push(n1);
+            while(true) {
+                var op = input.getOperator();
+                if(op === "=") {
+                    break;
+                } else {
+                    form.push(op);
+                }
+                var n2 = input.getSecondValue(form);
+                form.push(n2);
+                n1 = calculator.calculate(op, n1, n2);
+            }
+            output.print(form, n1);
+        };
+        main();
+    </script>
+</body>
+</html>
