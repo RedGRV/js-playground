@@ -9,19 +9,19 @@
 </head>
 <body>
     <script>
-        var num1 = -1;
-        var num2 = -1;
-        var op = "";
         function getFirstValue() {
-            num1 = Number(prompt("첫번째 숫자를 입력하세요."));
+            var num = Number(prompt("첫번째 숫자를 입력하세요."));
+            return num;
         };
-        function getSecondValue() {
-            num2 = Number(prompt("다음 숫자를 입력하세요. 현재 식: " + num1 + op));
+        function getSecondValue(form) {
+            var num = Number(prompt("다음 숫자를 입력하세요. 현재 식: " + form.join(' ')));
+            return num;
         };     
         function getOperator() {
-            op = prompt("연산자를 입력하세요.");
+            var op = prompt("연산자를 입력하세요.");
+            return op;
         };
-        function calculate() {
+        function calculate(op, num1, num2) {
             if(op === "+") {
                 num1 += num2;
             }
@@ -34,22 +34,29 @@
             else if(op === "/") {
                 num1 /= num2;
             }
+            return num1;
         };
-        function print() {
-            document.write("결과: " + num1);
+        function print(form, result) {
+            var a = form.join(' ');
+            document.write(a + " = " + result);
         };
         
         function main() {
-            getFirstValue();
+            var form = [];
+            var n1 = getFirstValue();
+            form.push(n1);
             while(true) {
-                getOperator();
+                var op = getOperator();
                 if(op === "q") {
                     break;
+                } else {
+                    form.push(op);
                 }
-                getSecondValue();
-                calculate();
+                var n2 = getSecondValue(form);
+                form.push(n2);
+                n1 = calculate(op, n1, n2);
             }
-            print();
+            print(form, n1);
         };
         main();                                                                                                                                                                                                                                                                                                  
     </script>
