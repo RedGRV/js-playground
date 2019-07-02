@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Calculator</title>
+    <h1>계산기</h1>
+</head>
+<body>
+    <input type="text" id="input"><button onclick="calculator.run()">계산</button>
+    <div id="output"></div>
+    <script>
+        var calculator = {};
+        calculator.input = "";
+        calculator.formula = [];
+        calculator.run = function() {
+            this.input = document.getElementById('input').value;
+            this.formula = this.input.split(' ');
+            var output = document.getElementById('output');
+            output.innerHTML = calculator.read(this.formula);
+        };
+        calculator.read = function(str) {
+            var result = Number(str[0]);
+            var num = 0;
+            var op = "";
+            for (var i = 1; i < str.length; i++) {
+                if((i % 2) === 1) {
+                    op = str[i];
+                } else {
+                    num = Number(str[i]);
+                    result = this.calculate(op, result, num);
+                }
+            }
+            return result;
+        };
+        calculator.calculate = function(op, num1, num2) {
+            if(op === "+") {
+                num1 += num2;
+            }
+            else if(op === "-") {
+                num1 -= num2;
+            }
+            else if(op === "*") {
+                num1 *= num2;
+            }
+            else if(op === "/") {
+                num1 /= num2;
+            }
+            return num1;
+        };
+    </script>
+</body>
+</html>
