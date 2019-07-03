@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Calculator</title>
+    <style>
+        #subdisplay {
+            border:1px solid black;
+            text-align:right;
+            width:215px;
+            background-color:whitesmoke;
+        }
+        #maindisplay {
+            border:1px solid black;
+            text-align:right;
+            width:215px;
+            height:50px;
+            font-size:40px;
+            margin-bottom:3px;
+        }
+        h1 {
+            margin:0px;
+        }
+        button {
+            width:50px;
+            height:50px;
+            margin-bottom:3px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Calculator</h1>
+    <!-- 출력 -->
+    <div id="subdisplay">　</div>
+    <div id="maindisplay"></div>
+    <!-- 버튼 -->
+    <button onclick="etc.cancel()">c</button>
+    <button>　</button>
+    <button onclick="etc.erase()">←</button>
+    <button onclick="etc.plus()">+</button><br>
+    <button onclick="number.seven()">7</button>
+    <button onclick="number.eight()">8</button>
+    <button onclick="number.nine()">9</button>
+    <button onclick="etc.minus()">-</button><br>
+    <button onclick="number.four()">4</button>
+    <button onclick="number.five()">5</button>
+    <button onclick="number.six()">6</button>
+    <button onclick="etc.multiply()">x</button><br>
+    <button onclick="number.one()">1</button>
+    <button onclick="number.two()">2</button>
+    <button onclick="number.three()">3</button>
+    <button onclick="etc.division()">÷</button><br>
+    <button>　</button>
+    <button onclick="number.zero()">0</button>
+    <button>　</button>
+    <button onclick="etc.result()">=</button>
+    
+    <script>
+        var input = {};
+        input.form = [];
+        input.display = [];
+        input.behindform = [];
+        input.result = 0;
+
+        var output = {};
+        output.subdisplay = document.getElementById("subdisplay");
+        output.maindisplay = document.getElementById("maindisplay");
+        output.subprint = function() {
+            var print = input.form.join('');
+            this.subdisplay.innerHTML = print;
+        }
+        output.mainprint = function() {
+            var print = input.display.join('');
+            this.maindisplay.innerHTML = print;
+        }
+        var calc = {};
+        calc.getform = function(op) {
+            input.form.push(input.display.join(''));
+            input.form.push(op);
+            input.behindform.push(input.display.join(''));
+            input.display = [];
+            input.behindform.push(op);
+            if (input.behindform.length === 4) {
+                var op = input.behindform[3];
+                var result = this.calculate(input.behindform[1], Number(input.behindform[0]), Number(input.behindform[2]));
+                input.behindform = [];
+                input.behindform.push(result);
+                input.behindform.push(op);
+
+            }
+        }
+        calc.calculate = function(op, num1, num2) {
+            if(op === "+") {
+                num1 += num2;
+            }
+            else if(op === "-") {
+                num1 -= num2;
+            }
+            else if(op === "*") {
+                num1 *= num2;
+            }
+            else if(op === "/") {
+                num1 /= num2;
+            }
+            return num1;
+        };
+          
+
+        var number = {};
+        number.one = function() {
+            if(input.result === 1) {
+                input.form = [];
+                input.behindform = [];
+                input.result = 0;
+            }
+            input.display.push("1");
+            output.mainprint();
+        }
+        number.two = function() {
+            if(input.result === 1) {
+                input.form = [];
+                input.behindform = [];
+                input.result = 0;
+            }
+            input.display.push("2");
+            output.mainprint();
+        }
+        number.three = function() {
+            if(input.result === 1) {
+                input.form = [];
+                input.behindform = [];
+                input.result = 0;
+            }
+            input.display.push("3");
+            output.mainprint();
+        }
+        number.four = function() {
+            if(input.result === 1) {
+                input.form = [];
+                input.behindform = [];
+                input.result = 0;
+            }
+            input.display.push("4");
+            output.mainprint();
+        }
+        number.five = function() {
+            if(input.result === 1) {
+                input.form = [];
+                input.behindform = [];
+                input.result = 0;
+            }
+            input.display.push("5");
+            output.mainprint();
+        }
+        number.six = function() {
+            if(input.result === 1) {
+                input.form = [];
+                input.behindform = [];
+                input.result = 0;
+            }
+            input.display.push("6");
+            output.mainprint();
+        }
+        number.seven = function() {
+            if(input.result === 1) {
+                input.form = [];
+                input.behindform = [];
+                input.result = 0;
+            }
+            input.display.push("7");
+            output.mainprint();
+        }
+        number.eight = function() {
+            if(input.result === 1) {
+                input.form = [];
+                input.behindform = [];
+                input.result = 0;
+            }
+            input.display.push("8");
+            output.mainprint();
+        }
+        number.nine = function() {
+            if(input.result === 1) {
+                input.form = [];
+                input.behindform = [];
+                input.result = 0;
+            }
+            input.display.push("9");
+            output.mainprint();
+        }
+        number.zero = function() {
+            if(input.result === 1) {
+                input.form = [];
+                input.behindform = [];
+                input.result = 0;
+            }
+            input.display.push("0");
+            output.mainprint();
+        }        
+
+        var etc = {};
+        etc.plus = function() {
+            calc.getform("+")
+            output.subprint();
+            output.maindisplay.innerHTML = input.behindform[0];
+            input.result = 0;
+        }
+        etc.minus = function() {
+            calc.getform("-")
+            output.subprint();
+            output.maindisplay.innerHTML = input.behindform[0];
+            input.result = 0;
+        }
+        etc.multiply = function() {
+            calc.getform("*")
+            output.subprint();
+            output.maindisplay.innerHTML = input.behindform[0];
+            input.result = 0;
+        }
+        etc.division = function() {
+            calc.getform("/")
+            output.subprint();
+            output.maindisplay.innerHTML = input.behindform[0];
+            input.result = 0;
+        }
+        etc.erase = function() {
+            input.display.pop();
+            output.subprint();
+            output.mainprint();
+        }
+        etc.cancel = function() {
+            input.form = [];
+            input.behindform = [];
+            output.subdisplay.innerHTML = 0;
+            output.maindisplay.innerHTML = 0;
+        }
+        etc.result = function() {
+            calc.getform("=")
+            input.form = [];
+            input.form.push(input.behindform[0]);
+            output.subdisplay.innerHTML = "　";
+            output.maindisplay.innerHTML = input.behindform[0];
+            input.result = 1;
+        }
+    </script>
+</body>
+</html>
