@@ -70,11 +70,11 @@
         output.subprint = function() {
             var print = input.form.join('');
             this.subdisplay.innerHTML = print;
-        }
+        };
         output.mainprint = function() {
             var print = input.display.join('');
             this.maindisplay.innerHTML = print;
-        }
+        };
         var calc = {};
         calc.getform = function(op) {
             input.form.push(input.display.join(''));
@@ -90,7 +90,7 @@
                 input.behindform.push(op);
 
             }
-        }
+        };
         calc.calculate = function(op, num1, num2) {
             if(op === "+") {
                 num1 += num2;
@@ -107,7 +107,6 @@
             return num1;
         };
           
-
         var number = {};
         number.one = function() {
             if(input.result === 1) {
@@ -117,7 +116,7 @@
             }
             input.display.push("1");
             output.mainprint();
-        }
+        };
         number.two = function() {
             if(input.result === 1) {
                 input.form = [];
@@ -126,7 +125,7 @@
             }
             input.display.push("2");
             output.mainprint();
-        }
+        };
         number.three = function() {
             if(input.result === 1) {
                 input.form = [];
@@ -135,7 +134,7 @@
             }
             input.display.push("3");
             output.mainprint();
-        }
+        };
         number.four = function() {
             if(input.result === 1) {
                 input.form = [];
@@ -144,7 +143,7 @@
             }
             input.display.push("4");
             output.mainprint();
-        }
+        };
         number.five = function() {
             if(input.result === 1) {
                 input.form = [];
@@ -153,7 +152,7 @@
             }
             input.display.push("5");
             output.mainprint();
-        }
+        };
         number.six = function() {
             if(input.result === 1) {
                 input.form = [];
@@ -162,7 +161,7 @@
             }
             input.display.push("6");
             output.mainprint();
-        }
+        };
         number.seven = function() {
             if(input.result === 1) {
                 input.form = [];
@@ -171,7 +170,7 @@
             }
             input.display.push("7");
             output.mainprint();
-        }
+        };
         number.eight = function() {
             if(input.result === 1) {
                 input.form = [];
@@ -180,7 +179,7 @@
             }
             input.display.push("8");
             output.mainprint();
-        }
+        };
         number.nine = function() {
             if(input.result === 1) {
                 input.form = [];
@@ -189,7 +188,7 @@
             }
             input.display.push("9");
             output.mainprint();
-        }
+        };
         number.zero = function() {
             if(input.result === 1) {
                 input.form = [];
@@ -198,7 +197,7 @@
             }
             input.display.push("0");
             output.mainprint();
-        }        
+        };       
 
         var etc = {};
         etc.plus = function() {
@@ -206,36 +205,36 @@
             output.subprint();
             output.maindisplay.innerHTML = input.behindform[0];
             input.result = 0;
-        }
+        };
         etc.minus = function() {
             calc.getform("-")
             output.subprint();
             output.maindisplay.innerHTML = input.behindform[0];
             input.result = 0;
-        }
+        };
         etc.multiply = function() {
             calc.getform("*")
             output.subprint();
             output.maindisplay.innerHTML = input.behindform[0];
             input.result = 0;
-        }
+        };
         etc.division = function() {
             calc.getform("/")
             output.subprint();
             output.maindisplay.innerHTML = input.behindform[0];
             input.result = 0;
-        }
+        };
         etc.erase = function() {
             input.display.pop();
             output.subprint();
             output.mainprint();
-        }
+        };
         etc.cancel = function() {
             input.form = [];
             input.behindform = [];
             output.subdisplay.innerHTML = 0;
             output.maindisplay.innerHTML = 0;
-        }
+        };
         etc.result = function() {
             calc.getform("=")
             input.form = [];
@@ -243,7 +242,7 @@
             output.subdisplay.innerHTML = "　";
             output.maindisplay.innerHTML = input.behindform[0];
             input.result = 1;
-        }
+        };
     </script>
 </body>
 </html>
