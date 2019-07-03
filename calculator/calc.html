@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Calculator</title>
+    <style>
+        #subdisplay {
+            border:1px solid black;
+            text-align:right;
+            width:215px;
+            background-color:whitesmoke;
+        }
+        #maindisplay {
+            border:1px solid black;
+            text-align:right;
+            width:215px;
+            height:50px;
+            font-size:40px;
+        }
+        h1 {
+            margin:0px;
+        }
+        button {
+            width:50px;
+            height:50px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Calculator</h1>
+    <div id="subdisplay"></div>
+    <div id="maindisplay"></div>
+    <button onclick="etc.plus()">+</button>
+    <button onclick="etc.minus()">-</button>
+    <button onclick="etc.multiply()">x</button>
+    <button onclick="etc.division()">÷</button><br>
+    <button onclick="number.seven()">7</button>
+    <button onclick="number.eight()">8</button>
+    <button onclick="number.nine()">9</button>
+    <button onclick="etc.erase()">◀</button><br>
+    <button onclick="number.four()">4</button>
+    <button onclick="number.five()">5</button>
+    <button onclick="number.six()">6</button>
+    <button onclick="etc.cancel()">c</button><br>
+    <button onclick="number.one()">1</button>
+    <button onclick="number.two()">2</button>
+    <button onclick="number.three()">3</button>
+    <button onclick="number.zero()">0</button>
+    
+    <script>
+        var input = {};
+        input.form = [];
+        input.result = "";
+
+        var output = {};
+        output.subdisplay = document.getElementById("subdisplay");
+        output.maindisplay = document.getElementById("maindisplay");
+        output.subprint = function() {
+            var print = input.form.join('');
+            this.subdisplay.innerHTML = print;
+        }
+        output.mainprint = function() {
+            var print = input.form.join('');
+            this.maindisplay.innerHTML = calc.calculate(print);
+        }
+        var calc = {};
+        calc.calculate = function(str) {
+            return eval(str).toFixed(2);
+        }        
+
+        var number = {};
+        number.one = function() {
+            input.form.push("1");
+            output.subprint();
+            output.mainprint();
+        }
+        number.two = function() {
+            input.form.push("2");
+            output.subprint();
+            output.mainprint();
+        }
+        number.three = function() {
+            input.form.push("3");
+            output.subprint();
+            output.mainprint();
+        }
+        number.four = function() {
+            input.form.push("4");
+            output.subprint();
+            output.mainprint();
+        }
+        number.five = function() {
+            input.form.push("5");
+            output.subprint();
+            output.mainprint();
+        }
+        number.six = function() {
+            input.form.push("6");
+            output.subprint();
+            output.mainprint();
+        }
+        number.seven = function() {
+            input.form.push("7");
+            output.subprint();
+            output.mainprint();
+        }
+        number.eight = function() {
+            input.form.push("8");
+            output.subprint();
+            output.mainprint();
+        }
+        number.nine = function() {
+            input.form.push("9");
+            output.subprint();
+            output.mainprint();
+        }
+        number.zero = function() {
+            input.form.push("0");
+            output.subprint();
+            output.mainprint();
+        }        
+
+        var etc = {};
+        etc.plus = function() {
+            input.form.push("+");
+            output.subprint();
+        }
+        etc.minus = function() {
+            input.form.push("-");
+            output.subprint();
+        }
+        etc.multiply = function() {
+            input.form.push("*");
+            output.subprint();
+        }
+        etc.division = function() {
+            input.form.push("/");
+            output.subprint();
+        }
+        etc.erase = function() {
+            input.form.pop();
+            output.subprint();
+            output.mainprint();
+        }
+        etc.cancel = function() {
+            input.form = ["0"];
+            output.subprint();
+            output.mainprint();
+        }
+    </script>
+</body>
+</html>
