@@ -63,6 +63,13 @@
         input.display = [];
         input.behindform = [];
         input.result = 0;
+        input.reset = function() {
+            if(input.result === 1) {
+                input.form = [];
+                input.behindform = [];
+                input.result = 0;
+            }
+        };
 
         var output = {};
         output.subdisplay = document.getElementById("subdisplay");
@@ -75,6 +82,12 @@
             var print = input.display.join('');
             this.maindisplay.innerHTML = print;
         };
+        output.result = function() {
+            var result = Number(input.behindform[0]);
+            output.maindisplay.innerHTML = result.toFixed(2);
+            input.result = 0;
+        };
+
         var calc = {};
         calc.getform = function(op) {
             input.form.push(input.display.join(''));
@@ -109,92 +122,52 @@
           
         var number = {};
         number.one = function() {
-            if(input.result === 1) {
-                input.form = [];
-                input.behindform = [];
-                input.result = 0;
-            }
+            input.reset();
             input.display.push("1");
             output.mainprint();
         };
         number.two = function() {
-            if(input.result === 1) {
-                input.form = [];
-                input.behindform = [];
-                input.result = 0;
-            }
+            input.reset();
             input.display.push("2");
             output.mainprint();
         };
         number.three = function() {
-            if(input.result === 1) {
-                input.form = [];
-                input.behindform = [];
-                input.result = 0;
-            }
+            input.reset();
             input.display.push("3");
             output.mainprint();
         };
         number.four = function() {
-            if(input.result === 1) {
-                input.form = [];
-                input.behindform = [];
-                input.result = 0;
-            }
+            input.reset();
             input.display.push("4");
             output.mainprint();
         };
         number.five = function() {
-            if(input.result === 1) {
-                input.form = [];
-                input.behindform = [];
-                input.result = 0;
-            }
+            input.reset();
             input.display.push("5");
             output.mainprint();
         };
         number.six = function() {
-            if(input.result === 1) {
-                input.form = [];
-                input.behindform = [];
-                input.result = 0;
-            }
+            input.reset();
             input.display.push("6");
             output.mainprint();
         };
         number.seven = function() {
-            if(input.result === 1) {
-                input.form = [];
-                input.behindform = [];
-                input.result = 0;
-            }
+            input.reset();
             input.display.push("7");
             output.mainprint();
         };
         number.eight = function() {
-            if(input.result === 1) {
-                input.form = [];
-                input.behindform = [];
-                input.result = 0;
-            }
+            input.reset();
             input.display.push("8");
             output.mainprint();
         };
         number.nine = function() {
-            if(input.result === 1) {
-                input.form = [];
-                input.behindform = [];
-                input.result = 0;
-            }
+            input.reset();
             input.display.push("9");
             output.mainprint();
         };
         number.zero = function() {
-            if(input.result === 1) {
-                input.form = [];
-                input.behindform = [];
-                input.result = 0;
-            }
+            input.reset();
             input.display.push("0");
             output.mainprint();
         };       
@@ -203,31 +176,29 @@
         etc.plus = function() {
             calc.getform("+")
             output.subprint();
-            output.maindisplay.innerHTML = input.behindform[0];
-            input.result = 0;
+            output.result();
         };
         etc.minus = function() {
             calc.getform("-")
             output.subprint();
-            output.maindisplay.innerHTML = input.behindform[0];
-            input.result = 0;
+            output.result();
         };
         etc.multiply = function() {
             calc.getform("*")
             output.subprint();
-            output.maindisplay.innerHTML = input.behindform[0];
-            input.result = 0;
+            output.result();
         };
         etc.division = function() {
             calc.getform("/")
             output.subprint();
-            output.maindisplay.innerHTML = input.behindform[0];
-            input.result = 0;
+            output.result();
         };
         etc.erase = function() {
-            input.display.pop();
-            output.subprint();
-            output.mainprint();
+            if(input.result !== 1) {
+                input.display.pop();
+                output.subprint();
+                output.mainprint();
+            }
         };
         etc.cancel = function() {
             input.form = [];
@@ -238,9 +209,9 @@
         etc.result = function() {
             calc.getform("=")
             input.form = [];
-            input.form.push(input.behindform[0]);
+            input.form.push(Number(input.behindform[0]).toFixed(2));
             output.subdisplay.innerHTML = "　";
-            output.maindisplay.innerHTML = input.behindform[0];
+            output.result();
             input.result = 1;
         };
     </script>
