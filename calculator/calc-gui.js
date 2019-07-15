@@ -1,28 +1,34 @@
-var input = {'array': []};
+var input = { 'array': [] };
 
-input.getInput = function() {
+input.getInput = function () {
     return this.array.join("");
 }
 
 var output = {};
 output.text = document.getElementById('output');
 
-var clickNumbers = function(event) {
+var clickNumbers = function (event) {
     var str = event.target.innerHTML;
     console.log(str);
-    switch (str) {
-        case 'BS':
-            input.array.pop();
-            break;
-        case '+':
-        case '-':
-        case '*':
-        case '/':
-            input.array.push(' ' + str + ' ');
-            break;
-        default:
-            input.array.push(str);
+
+    if (str === 'BS') {
+        input.array.pop();
+    } else if (str === '+' || str === '-' || str === '*' || str === '/') {
+        input.array.push(' ' + str + ' ');
+    } else {
+        input.array.push(str);
     }
+
+    // switch (str) {
+    //     case 'BS':
+    //         break;
+    //     case '+':
+    //     case '-':
+    //     case '*':
+    //     case '/':
+    //         break;
+    //     default:
+    // }
 
     if (input.array.length === 0) {
         output.text.innerHTML = "Empty";
@@ -31,13 +37,13 @@ var clickNumbers = function(event) {
     }
 }
 
-var showResult = function(event) {
+var showResult = function (event) {
     console.log("show result");
     console.log(event.target.innerHTML);
 }
 
 
-        
+
 // input.init = function(str) {
 //     this.list = str.split(" ");   
 // };
@@ -60,7 +66,7 @@ var showResult = function(event) {
 //         return "$";
 //     }            
 // };      
-        
+
 // calculator = {};
 // calculator.calculate = function(first, second, op) {
 //     var ret;
@@ -82,7 +88,7 @@ var showResult = function(event) {
 //     }
 //     return ret;
 // }
-        
+
 // var output = {};
 // output.out = document.getElementById('output');
 
