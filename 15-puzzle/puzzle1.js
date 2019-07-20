@@ -1,12 +1,16 @@
 const input = {};
 
+input.example = ["HELLO", "WORLD", "COMPUTER", "PHONE", "KEYBOARD", "MOUSE", "WORD", "PUZZLE", "HTML", "TALK"];
 input.answer = [];
-input.getAnswer = function() {
-    const ans = document.getElementById('ans').innerHTML;
+
+input.getAnswer = function () {
+    const ans = input.example[action.getRandom(10)];
+    const display = document.getElementById('ans');
+    display.innerHTML = ans;
     this.answer = ans.split('');
 };
 
-input.createBtn = function() {
+input.createBtn = function () {
     const word = document.getElementById('word');
     for (let i = 0; i < this.answer.length; i++) {
         output.btn[i] = document.createElement('div');
@@ -19,7 +23,12 @@ input.createBtn = function() {
 
 const action = {};
 
-action.copyAns = function(arr) {
+action.getRandom = function (count) {
+    const random = Math.floor(Math.random() * count);
+    return random;
+};
+
+action.copyAns = function (arr) {
     const tmp = [];
     for (let i = 0; i < arr.length; i++) {
         tmp[i] = arr[i];
@@ -27,7 +36,7 @@ action.copyAns = function(arr) {
     return tmp;
 };
 
-action.reverse = function() {
+action.reverse = function () {
     // input.answer.reverse();
     const tmp = this.copyAns(input.answer);
     for (let i = 0; i < input.answer.length; i++) {
@@ -37,25 +46,40 @@ action.reverse = function() {
     output.printResult();
 };
 
-action.pushRight = function() {
+action.pushRight = function () {
     const tmp = input.answer.pop();
     input.answer.unshift(tmp);
     output.printBtn();
     output.printResult();
 };
 
-action.pushLeft = function() {
+action.pushLeft = function () {
     const tmp = input.answer.shift();
     input.answer.push(tmp);
     output.printBtn();
     output.printResult();
 };
 
+action.mix = function () {
+    const tmp = this.copyAns(input.answer);
+    for (let i = 0; i < tmp.length; i++) {
+        while (true) {
+            const num = this.getRandom(tmp.length);
+            if (tmp[num] !== undefined) {
+                input.answer[i] = tmp[num];
+                tmp[num] = undefined;
+                break;
+            }
+        }
+    }
+    output.printBtn();
+    output.printResult();
+};
 
 const output = {};
 
 output.btn = [];
-output.printBtn = function() {
+output.printBtn = function () {
     for (let i = 0; i < input.answer.length; i++) {
         output.btn[i].innerHTML = input.answer[i];
     }
@@ -63,7 +87,7 @@ output.printBtn = function() {
 };
 
 output.result = document.getElementById('result');
-output.printResult = function() {
+output.printResult = function () {
     const ans = document.getElementById('ans').innerHTML;
     if (input.answer.join('') === ans) {
         this.result.innerHTML = "일치합니다.";
