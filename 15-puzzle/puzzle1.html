@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>PUZZLE</title>
+    <style>
+        #ans {
+            font-size: 2em;
+        }
+        #word>div {
+            display: inline-block;
+            text-align: center;
+            font-size: 4em;
+            border: 1px solid gray;
+            width: 100px;
+            height: 100px;
+        }
+
+        button {
+            width: 100px;
+            height: 50px;
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>단어맞추기 퍼즐</h1>
+    </header>
+    <section>
+        <div id="ans">HELLO</div>
+        <div id="word"></div>
+        <button onclick="action.reverse()">뒤집기</button>
+        <button onclick="action.push()">밀어내기</button>
+        <div id="result"></div>
+    </section>
+
+    <script>
+        const input = {};
+        input.answer = [];
+        input.getAnswer = function () {
+            const ans = document.getElementById('ans').innerHTML;
+            this.answer = ans.split('');
+        };
+
+
+        const action = {};
+        action.createBtn = function () {
+            const word = document.getElementById('word');
+            for (let i = 0; i < input.answer.length; i++) {
+                const btn = document.createElement('div');
+                btn.id = "btn" + i;
+                word.appendChild(btn);
+                btn.innerHTML = input.answer[i];
+            }
+            output.printResult();
+        };
+        action.reverse = function () {
+            input.answer.reverse();
+            output.btn();
+            output.printResult();
+        };
+        action.push = function () {
+            const tmp = input.answer.pop();
+            input.answer.unshift(tmp);
+            output.btn();
+            output.printResult();
+        };
+
+        const output = {};
+        output.result = document.getElementById('result');
+        output.btn = function () {
+            const word = document.getElementById('word');
+            for (let i = 0; i < input.answer.length; i++) {
+                const btn = document.getElementById('btn' + i);
+                btn.innerHTML = input.answer[i];
+            }
+            this.printResult();
+        };
+        output.printResult = function () {
+            const ans = document.getElementById('ans').innerHTML;
+            if (input.answer.join('') === ans) {
+                this.result.innerHTML = "일치합니다.";
+            } else {
+                this.result.innerHTML = "일치하지 않습니다.";
+            }
+        };
+
+        function main() {
+            input.getAnswer();
+            action.createBtn();
+        }
+
+        main();
+    </script>
+</body>
+
+</html>
