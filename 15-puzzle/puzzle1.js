@@ -1,49 +1,68 @@
 const input = {};
+
 input.answer = [];
 input.getAnswer = function() {
     const ans = document.getElementById('ans').innerHTML;
     this.answer = ans.split('');
 };
 
-const action = {};
-action.createBtn = function() {
+input.createBtn = function() {
     const word = document.getElementById('word');
-    for (let i = 0; i < input.answer.length; i++) {
-        const btn = document.createElement('div');
-        btn.id = "btn" + i;
-        word.appendChild(btn);
-        btn.innerHTML = input.answer[i];
+    for (let i = 0; i < this.answer.length; i++) {
+        output.btn[i] = document.createElement('div');
+        word.appendChild(output.btn[i]);
+        output.btn[i].innerHTML = this.answer[i];
     }
-    output.printResult();
-};
-action.reverse = function() {
-    input.answer.reverse();
-    output.btn();
-    output.printResult();
-};
-action.pushRight = function() {
-    const tmp = input.answer.pop();
-    input.answer.unshift(tmp);
-    output.btn();
-    output.printResult();
-};
-action.pushLeft = function() {
-    const tmp = input.answer.shift();
-    input.answer.push(tmp);
-    output.btn();
     output.printResult();
 };
 
-const output = {};
-output.result = document.getElementById('result');
-output.btn = function() {
-    const word = document.getElementById('word');
+
+const action = {};
+
+action.copyAns = function(arr) {
+    const tmp = [];
+    for (let i = 0; i < arr.length; i++) {
+        tmp[i] = arr[i];
+    }
+    return tmp;
+};
+
+action.reverse = function() {
+    // input.answer.reverse();
+    const tmp = this.copyAns(input.answer);
     for (let i = 0; i < input.answer.length; i++) {
-        const btn = document.getElementById('btn' + i);
-        btn.innerHTML = input.answer[i];
+        input.answer[i] = tmp.pop();
+    }
+    output.printBtn();
+    output.printResult();
+};
+
+action.pushRight = function() {
+    const tmp = input.answer.pop();
+    input.answer.unshift(tmp);
+    output.printBtn();
+    output.printResult();
+};
+
+action.pushLeft = function() {
+    const tmp = input.answer.shift();
+    input.answer.push(tmp);
+    output.printBtn();
+    output.printResult();
+};
+
+
+const output = {};
+
+output.btn = [];
+output.printBtn = function() {
+    for (let i = 0; i < input.answer.length; i++) {
+        output.btn[i].innerHTML = input.answer[i];
     }
     this.printResult();
 };
+
+output.result = document.getElementById('result');
 output.printResult = function() {
     const ans = document.getElementById('ans').innerHTML;
     if (input.answer.join('') === ans) {
@@ -55,7 +74,7 @@ output.printResult = function() {
 
 function main() {
     input.getAnswer();
-    action.createBtn();
+    input.createBtn();
 }
 
 main();
