@@ -1,16 +1,19 @@
-const input = {};
+//input objects
+const input = { 'answer': [] };
 
+//words
 input.example = ["HELLO", "WORLD", "COMPUTER", "PHONE", "KEYBOARD", "MOUSE", "WORD", "PUZZLE", "HTML", "TALK"];
-input.answer = [];
 
-input.getAnswer = function () {
+//choose 1 word from words
+input.getAnswer = function() {
     const ans = input.example[action.getRandom(10)];
+    this.answer = ans.split('');
     const display = document.getElementById('ans');
     display.innerHTML = ans;
-    this.answer = ans.split('');
 };
 
-input.createBtn = function () {
+//create buttons
+input.createBtn = function() {
     const word = document.getElementById('word');
     for (let i = 0; i < this.answer.length; i++) {
         output.btn[i] = document.createElement('div');
@@ -19,15 +22,17 @@ input.createBtn = function () {
     }
 };
 
-
+//action objects
 const action = {};
 
-action.getRandom = function (count) {
+//get random number
+action.getRandom = function(count) {
     const random = Math.floor(Math.random() * count);
     return random;
 };
 
-action.copyAns = function (arr) {
+//copy answer array
+action.copyAns = function(arr) {
     const tmp = [];
     for (let i = 0; i < arr.length; i++) {
         tmp[i] = arr[i];
@@ -35,8 +40,8 @@ action.copyAns = function (arr) {
     return tmp;
 };
 
-action.reverse = function () {
-    // input.answer.reverse();
+//reverse buttons
+action.reverse = function() {
     const tmp = this.copyAns(input.answer);
     for (let i = 0; i < input.answer.length; i++) {
         input.answer[i] = tmp.pop();
@@ -45,21 +50,24 @@ action.reverse = function () {
     output.printResult();
 };
 
-action.pushRight = function () {
+//push buttons right
+action.pushRight = function() {
     const tmp = input.answer.pop();
     input.answer.unshift(tmp);
     output.printBtn();
     output.printResult();
 };
 
-action.pushLeft = function () {
+//push buttons left
+action.pushLeft = function() {
     const tmp = input.answer.shift();
     input.answer.push(tmp);
     output.printBtn();
     output.printResult();
 };
 
-action.mix = function () {
+//mix buttons random
+action.mix = function() {
     if (this.getRandom(2) === 0) {
         this.reverse();
     }
@@ -68,28 +76,34 @@ action.mix = function () {
     }
 };
 
-action.init = function () {
+//initialize buttons
+action.init = function() {
     const word = document.getElementById('word');
     while (word.firstChild) {
         word.removeChild(word.firstChild);
     }
 };
 
-const output = {};
+//output objects
+const output = {
+    'btn': [],
+    'result': document.getElementById('result'),
+    'score': 0
+};
 
-output.btn = [];
-output.printBtn = function () {
+//print buttons
+output.printBtn = function() {
     for (let i = 0; i < input.answer.length; i++) {
         output.btn[i].innerHTML = input.answer[i];
     }
 };
 
-output.result = document.getElementById('result');
-output.printResult = function () {
+//print result
+output.printResult = function() {
     const ans = document.getElementById('ans').innerHTML;
     if (input.answer.join('') === ans) {
         this.score++;
-        if(this.score === 3) {
+        if (this.score === 3) {
             document.write("<h1>Thank you for playing!!!</h1>");
         } else {
             action.init();
@@ -98,8 +112,8 @@ output.printResult = function () {
     }
 };
 
-output.score = 0;
-output.printScore = function () {
+//print score
+output.printScore = function() {
     const score = document.getElementById('score');
     let str = "SCORE : ";
     for (let i = 0; i < this.score; i++) {
@@ -108,6 +122,7 @@ output.printScore = function () {
     score.innerHTML = str;
 }
 
+//main
 function main() {
     input.getAnswer();
     input.createBtn();
