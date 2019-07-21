@@ -1,3 +1,9 @@
+//html elements
+const score = document.getElementById('score');
+const ans = document.getElementById('ans');
+const word = document.getElementById('word');
+const result = document.getElementById('result');
+
 //input objects
 const input = { 'answer': [] };
 
@@ -12,15 +18,13 @@ input.getRandom = function(count) {
 
 //choose 1 word from words
 input.getAnswer = function() {
-    const ans = this.example[this.getRandom(10)];
-    this.answer = ans.split('');
-    const display = document.getElementById('ans');
-    display.innerHTML = ans;
+    const word = this.example[this.getRandom(10)];
+    ans.innerHTML = word;
+    this.answer = ans.innerHTML.split('');
 };
 
 //create buttons
 input.createBtn = function() {
-    const word = document.getElementById('word');
     for (let i = 0; i < this.answer.length; i++) {
         output.btn[i] = document.createElement('div');
         word.appendChild(output.btn[i]);
@@ -76,11 +80,20 @@ action.pushLeft = function() {
     output.printResult();
 };
 
+action.countScore = function() {
+    output.score++;
+    if (output.score === 3) {
+        document.write("<h1>Thank you for playing!!!</h1>");
+    } else {
+        output.init();
+        main();
+    }
+};
+
 
 //output objects
 const output = {
     'btn': [],
-    'result': document.getElementById('result'),
     'score': 0
 };
 
@@ -93,7 +106,6 @@ output.printBtn = function() {
 
 //initialize buttons
 output.init = function() {
-    const word = document.getElementById('word');
     while (word.firstChild) {
         word.removeChild(word.firstChild);
     }
@@ -101,27 +113,22 @@ output.init = function() {
 
 //print result
 output.printResult = function() {
-    const ans = document.getElementById('ans').innerHTML;
-    if (input.answer.join('') === ans) {
-        this.score++;
-        if (this.score === 3) {
-            document.write("<h1>Thank you for playing!!!</h1>");
-        } else {
-            output.init();
-            main();
-        }
+    if (input.answer.join('') === ans.innerHTML) {
+        result.innerHTML = "일치합니다."
+        setTimeout('action.countScore()', 3000);
+    } else {
+        result.innerHTML = "일치하지 않습니다."
     }
 };
 
 //print score
 output.printScore = function() {
-    const score = document.getElementById('score');
     let str = "SCORE : ";
     for (let i = 0; i < this.score; i++) {
         str += "●";
     }
     score.innerHTML = str;
-}
+};
 
 //main
 function main() {
