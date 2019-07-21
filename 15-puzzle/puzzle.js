@@ -80,12 +80,34 @@ action.pushLeft = function() {
     output.printResult();
 };
 
+//initialize buttons
+action.init = function() {
+    this.ableButtons();
+    while (word.firstChild) {
+        word.removeChild(word.firstChild);
+    }
+};
+
+action.ableButtons = function() {
+    for (let i = 1; i <= 3; i++) {
+        const btn = document.getElementById('btn' + i);
+        btn.disabled = false;
+    }
+}
+
+action.disableButtons = function() {
+    for (let i = 1; i <= 3; i++) {
+        const btn = document.getElementById('btn' + i);
+        btn.disabled = true;
+    }
+};
+
 action.countScore = function() {
     output.score++;
     if (output.score === 3) {
-        document.write("<h1>Thank you for playing!!!</h1>");
+        alert("Thank you for playing!!!");
     } else {
-        output.init();
+        action.init();
         main();
     }
 };
@@ -104,16 +126,10 @@ output.printBtn = function() {
     }
 };
 
-//initialize buttons
-output.init = function() {
-    while (word.firstChild) {
-        word.removeChild(word.firstChild);
-    }
-};
-
 //print result
 output.printResult = function() {
     if (input.answer.join('') === ans.innerHTML) {
+        action.disableButtons();
         result.innerHTML = "일치합니다."
         setTimeout('action.countScore()', 3000);
     } else {
