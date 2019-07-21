@@ -4,9 +4,15 @@ const input = { 'answer': [] };
 //words
 input.example = ["HELLO", "WORLD", "COMPUTER", "PHONE", "KEYBOARD", "MOUSE", "WORD", "PUZZLE", "HTML", "TALK"];
 
+//get random number
+input.getRandom = function(count) {
+    const random = Math.floor(Math.random() * count);
+    return random;
+};
+
 //choose 1 word from words
 input.getAnswer = function() {
-    const ans = input.example[action.getRandom(10)];
+    const ans = this.example[this.getRandom(10)];
     this.answer = ans.split('');
     const display = document.getElementById('ans');
     display.innerHTML = ans;
@@ -22,17 +28,18 @@ input.createBtn = function() {
     }
 };
 
-//action objects
-const action = {};
-
-//get random number
-action.getRandom = function(count) {
-    const random = Math.floor(Math.random() * count);
-    return random;
+//mix buttons random
+input.mix = function() {
+    if (this.getRandom(2) === 0) {
+        action.reverse();
+    }
+    for (let i = 0; i < this.getRandom(this.answer.length - 2) + 2; i++) {
+        action.pushRight();
+    }
 };
 
 //copy answer array
-action.copyAns = function(arr) {
+input.copyAns = function(arr) {
     const tmp = [];
     for (let i = 0; i < arr.length; i++) {
         tmp[i] = arr[i];
@@ -40,9 +47,12 @@ action.copyAns = function(arr) {
     return tmp;
 };
 
+//action objects
+const action = {};
+
 //reverse buttons
 action.reverse = function() {
-    const tmp = this.copyAns(input.answer);
+    const tmp = input.copyAns(input.answer);
     for (let i = 0; i < input.answer.length; i++) {
         input.answer[i] = tmp.pop();
     }
@@ -66,23 +76,6 @@ action.pushLeft = function() {
     output.printResult();
 };
 
-//mix buttons random
-action.mix = function() {
-    if (this.getRandom(2) === 0) {
-        this.reverse();
-    }
-    for (let i = 0; i < this.getRandom(input.answer.length - 2) + 2; i++) {
-        this.pushRight();
-    }
-};
-
-//initialize buttons
-action.init = function() {
-    const word = document.getElementById('word');
-    while (word.firstChild) {
-        word.removeChild(word.firstChild);
-    }
-};
 
 //output objects
 const output = {
@@ -94,7 +87,15 @@ const output = {
 //print buttons
 output.printBtn = function() {
     for (let i = 0; i < input.answer.length; i++) {
-        output.btn[i].innerHTML = input.answer[i];
+        this.btn[i].innerHTML = input.answer[i];
+    }
+};
+
+//initialize buttons
+output.init = function() {
+    const word = document.getElementById('word');
+    while (word.firstChild) {
+        word.removeChild(word.firstChild);
     }
 };
 
@@ -106,7 +107,7 @@ output.printResult = function() {
         if (this.score === 3) {
             document.write("<h1>Thank you for playing!!!</h1>");
         } else {
-            action.init();
+            output.init();
             main();
         }
     }
@@ -126,7 +127,7 @@ output.printScore = function() {
 function main() {
     input.getAnswer();
     input.createBtn();
-    action.mix();
+    input.mix();
     output.printScore();
 }
 
