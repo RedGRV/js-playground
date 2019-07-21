@@ -17,7 +17,6 @@ input.createBtn = function () {
         word.appendChild(output.btn[i]);
         output.btn[i].innerHTML = this.answer[i];
     }
-    output.printResult();
 };
 
 
@@ -64,26 +63,17 @@ action.mix = function () {
     if (this.getRandom(2) === 0) {
         this.reverse();
     }
-    for (let i = 0; i < this.getRandom(input.answer.length); i++) {
+    for (let i = 0; i < this.getRandom(input.answer.length - 2) + 2; i++) {
         this.pushRight();
     }
 };
 
-// action.mix = function () {
-//     const tmp = this.copyAns(input.answer);
-//     for (let i = 0; i < tmp.length; i++) {
-//         while (true) {
-//             const num = this.getRandom(tmp.length);
-//             if (tmp[num] !== undefined) {
-//                 input.answer[i] = tmp[num];
-//                 tmp[num] = undefined;
-//                 break;
-//             }
-//         }
-//     }
-//     output.printBtn();
-//     output.printResult();
-// };
+action.init = function () {
+    const word = document.getElementById('word');
+    while (word.firstChild) {
+        word.removeChild(word.firstChild);
+    }
+};
 
 const output = {};
 
@@ -92,23 +82,37 @@ output.printBtn = function () {
     for (let i = 0; i < input.answer.length; i++) {
         output.btn[i].innerHTML = input.answer[i];
     }
-    this.printResult();
 };
 
 output.result = document.getElementById('result');
 output.printResult = function () {
     const ans = document.getElementById('ans').innerHTML;
     if (input.answer.join('') === ans) {
-        this.result.innerHTML = "일치합니다.";
-    } else {
-        this.result.innerHTML = "일치하지 않습니다.";
+        this.score++;
+        if(this.score === 3) {
+            document.write("<h1>Thank you for playing!!!</h1>");
+        } else {
+            action.init();
+            main();
+        }
     }
 };
+
+output.score = 0;
+output.printScore = function () {
+    const score = document.getElementById('score');
+    let str = "SCORE : ";
+    for (let i = 0; i < this.score; i++) {
+        str += "●";
+    }
+    score.innerHTML = str;
+}
 
 function main() {
     input.getAnswer();
     input.createBtn();
     action.mix();
+    output.printScore();
 }
 
 main();
