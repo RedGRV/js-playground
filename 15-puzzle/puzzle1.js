@@ -61,20 +61,29 @@ action.pushLeft = function () {
 };
 
 action.mix = function () {
-    const tmp = this.copyAns(input.answer);
-    for (let i = 0; i < tmp.length; i++) {
-        while (true) {
-            const num = this.getRandom(tmp.length);
-            if (tmp[num] !== undefined) {
-                input.answer[i] = tmp[num];
-                tmp[num] = undefined;
-                break;
-            }
-        }
+    if (this.getRandom(2) === 0) {
+        this.reverse();
     }
-    output.printBtn();
-    output.printResult();
+    for (let i = 0; i < this.getRandom(input.answer.length); i++) {
+        this.pushRight();
+    }
 };
+
+// action.mix = function () {
+//     const tmp = this.copyAns(input.answer);
+//     for (let i = 0; i < tmp.length; i++) {
+//         while (true) {
+//             const num = this.getRandom(tmp.length);
+//             if (tmp[num] !== undefined) {
+//                 input.answer[i] = tmp[num];
+//                 tmp[num] = undefined;
+//                 break;
+//             }
+//         }
+//     }
+//     output.printBtn();
+//     output.printResult();
+// };
 
 const output = {};
 
@@ -99,6 +108,7 @@ output.printResult = function () {
 function main() {
     input.getAnswer();
     input.createBtn();
+    action.mix();
 }
 
 main();
