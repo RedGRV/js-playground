@@ -88,6 +88,7 @@ action.init = function() {
     }
 };
 
+//able buttons
 action.ableButtons = function() {
     for (let i = 1; i <= 3; i++) {
         const btn = document.getElementById('btn' + i);
@@ -95,6 +96,7 @@ action.ableButtons = function() {
     }
 }
 
+//disable buttons
 action.disableButtons = function() {
     for (let i = 1; i <= 3; i++) {
         const btn = document.getElementById('btn' + i);
@@ -102,8 +104,8 @@ action.disableButtons = function() {
     }
 };
 
+//count score
 action.countScore = function() {
-    output.score++;
     if (output.score === 3) {
         alert("Thank you for playing!!!");
     } else {
@@ -129,11 +131,14 @@ output.printBtn = function() {
 //print result
 output.printResult = function() {
     if (input.answer.join('') === ans.innerHTML) {
+        this.score++;
+        this.printScore();
         action.disableButtons();
         result.innerHTML = "일치합니다."
         setTimeout('action.countScore()', 3000);
     } else {
         result.innerHTML = "일치하지 않습니다."
+        this.printScore();
     }
 };
 
@@ -151,7 +156,6 @@ function main() {
     input.getAnswer();
     input.createBtn();
     input.mix();
-    output.printScore();
 }
 
 main();
