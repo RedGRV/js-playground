@@ -3,6 +3,7 @@ const score = document.getElementById('score');
 const ans = document.getElementById('ans');
 const word = document.getElementById('word');
 const result = document.getElementById('result');
+const timer = document.getElementById('timer');
 
 //input objects
 const input = { 'answer': [] };
@@ -37,7 +38,7 @@ input.mix = function() {
     if (this.getRandom(2) === 0) {
         action.reverse();
     }
-    for (let i = 0; i < this.getRandom(this.answer.length - 2) + 2; i++) {
+    for (let i = 0; i < this.getRandom(this.answer.length - 1) + 1; i++) {
         action.pushRight();
     }
 };
@@ -52,7 +53,7 @@ input.copyAns = function(arr) {
 };
 
 //action objects
-const action = {};
+const action = { 'start': Date.now(), 'time': 0 };
 
 //reverse buttons
 action.reverse = function() {
@@ -86,6 +87,9 @@ action.init = function() {
     while (word.firstChild) {
         word.removeChild(word.firstChild);
     }
+    input.getAnswer();
+    input.createBtn();
+    input.mix();
 };
 
 //able buttons
@@ -104,16 +108,15 @@ action.disableButtons = function() {
     }
 };
 
-//count score
+//count score and set a timer
 action.countScore = function() {
     if (output.score === 3) {
-        alert("Thank you for playing!!!");
+        clearInterval(action.timer);
+        alert("Thank you for playing!!!\n" + "You took " + parseInt(this.time) + " seconds to solve the problems!");
     } else {
         action.init();
-        main();
     }
 };
-
 
 //output objects
 const output = {
@@ -151,8 +154,14 @@ output.printScore = function() {
     score.innerHTML = str;
 };
 
+const updateTime = function() {
+    action.time = (Date.now() - action.start) / 1000;
+    timer.innerHTML = "time : " + action.time + " s";
+}
+
 //main
 function main() {
+    action.timer = setInterval(updateTime, 50);
     input.getAnswer();
     input.createBtn();
     input.mix();
