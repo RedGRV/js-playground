@@ -1,0 +1,20 @@
+#score {
+    font-size: 1.5em;
+}
+
+#ans {
+    font-size: 2em;
+}
+
+#word>div {
+    display: inline-block;
+    text-align: center;
+    font-size: 4em;
+    border: 1px solid gray;
+    width: 100px;
+    height: 100px;
+}
+
+button {
+    margin: 10px;
+}

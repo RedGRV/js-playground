@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>PUZZLE</title>
+    <link rel="stylesheet" href="puzzle.css">
+</head>
+
+<body>
+    <header>
+        <h1>단어맞추기 퍼즐</h1>
+        <div id="timer">time : 0</div>
+        <div id="score"></div>
+    </header>
+    <section>
+        <div id="ans"></div>
+        <div id="word"></div>
+        <button onclick="action.pushLeft()" id="btn1">왼쪽으로 밀어내기</button>
+        <button onclick="action.reverse()" id="btn2">뒤집기</button>
+        <button onclick="action.pushRight()" id="btn3">오른쪽으로 밀어내기</button>
+        <div id="result"></div>
+    </section>
+
+    <script src="puzzle.js"></script>
+</body>
+
+</html>
